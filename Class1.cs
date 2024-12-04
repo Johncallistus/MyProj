@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System;
 
 
 
@@ -51,9 +52,31 @@ namespace SeleniumTests
 
 
         }
-       
+        [Test]
+        public void InsuranceQuote02_AccidentsTwo()
+        {
+            driver.FindElement(By.Id("firstName")).SendKeys("John");
+            driver.FindElement(By.Id("lastName")).SendKeys("Agara");
+            driver.FindElement(By.Id("address")).SendKeys("123 Oak St");
+            driver.FindElement(By.Id("city")).SendKeys("OakVile");
+            driver.FindElement(By.Id("province")).SendKeys("ON");
+            driver.FindElement(By.Id("postalCode")).SendKeys("N2L 4G1");
+            driver.FindElement(By.Id("phone")).SendKeys("(123)123-1234");
+            driver.FindElement(By.Id("email")).SendKeys("john.agara@mail.com");
+            driver.FindElement(By.Id("age")).SendKeys("25");
+            driver.FindElement(By.Id("experience")).SendKeys("3");
+            driver.FindElement(By.Id("accidents")).SendKeys("2");
+
+            driver.FindElement(By.Id("btnSubmit")).Click();
+
+            string result = driver.FindElement(By.Id("finalQuote")).GetAttribute("value");
+            // Assert.AreEqual("Insurance provided; Base rate = $4500", result);
+            Assert.That(result, Is.EqualTo("$4500"));
+        }
+        
 
     }
 
 }
+
 
